@@ -90,6 +90,7 @@ CDllSampleCppDlg::CDllSampleCppDlg(CWnd* pParent /*=NULL*/)
 	, accArrDlg(NULL)
 	, curAccArrDlg(NULL)
 	, m_EditInp(_T(""))
+	
 {
 
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -124,8 +125,8 @@ CDllSampleCppDlg::CDllSampleCppDlg(CWnd* pParent /*=NULL*/)
 
 
 
-	//<A-1>
 
+	//<A-1>
 
 }
 
@@ -277,27 +278,51 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	//AD変換のプログラム
 	//変更するなら感度のみ
 	
-	// 加速度データ解析/////////↓AD変換↓////////////////////////
-	WmsData data(packet.data[0], packet.pid);
-	
 	const double bit_scale = 65535;
 	const double acc_0 = 1.65;
 	const double s_acc = 0.057; //1Gあたりの感度を38.5mV/G(30G)に一次変更(9/22)(s_acc=0.385)　//元データは，s_acc = 0.057　感度は大きいほうが精度が高いかも
-	//const double ang_0 = 1.5;
-	//const double s_ang = 0.0008; //センサー感度を3.624mV/dps(300dps)に一次変更(9/22)(s_ang = 0.003624)　//元データは，s_ang = 0.0008
+	const double ang_0 = 1.5;
+	const double s_ang = 0.0008; //センサー感度を3.624mV/dps(300dps)に一次変更(9/22)(s_ang = 0.003624)　//元データは，s_ang = 0.0008
+	
+	//　補正係数の定義 （加速度）
+	double acc_a_x, acc_a_y, acc_a_z;	//	a:傾き
+	double acc_bias_x, acc_bias_y, acc_bias_z;	//	bias:バイアス
+
+		//補正係数入力(加速度)
+	
+	acc_a_x=2.1476;			////////////////////////////////////////	
+	acc_a_y=2.1891;			////////////////////////////////////////
+	acc_a_z=2.1311;			////////	ここに値を入力　　//////////
+	acc_bias_x=-1.5705;		////////////////////////////////////////
+	acc_bias_y=-0.6965;		////////////////////////////////////////
+	acc_bias_z=-0.6287;		////////////////////////////////////////
+
+	//  補正係数の定義　（角速度）
+	double ang_a_x, ang_a_y, ang_a_z;	//	a:傾き
+	double ang_bias_x,ang_bias_y,ang_bias_z;	//	bias:バイアス
+
+	
+	//補正係数入力
+	ang_a_x=4.09;				///////////////////////////////////////
+	ang_a_y=1.0;				///////////////////////////////////////
+	ang_a_z=1.0;				/////////	ここに値を入力　　/////////
+	ang_bias_x=337;				///////////////////////////////////////
+	ang_bias_y=0;				///////////////////////////////////////
+	ang_bias_z=0;				///////////////////////////////////////
+	
+	static int count4=0 , count5=0 , count2=0;
+
+
+	// 加速度データ解析/////////↓AD変換↓////////////////////////
+	for(int i=0;i<5;i++){
+	WmsData data(packet.data[i], packet.pid);
 	
 	for(int i=0; i<3; i++){
 		msg.acc[i] = (3.3 * data.acc[i] / bit_scale - acc_0) / s_acc;
-		//msg.ang[i] = (3.3 * data.ang[i] / bit_scale - ang_0) / s_ang;
+		msg.ang[i] = (3.3 * data.ang[i] / bit_scale - ang_0) / s_ang;
+		//cout<<data.acc[i]<<endl;
 	}
 	/*
-	//センサ情報の定義は.h参照
-	for(int i=0; i<3; i++){
-		msg.acc[i] = (data.acc[i] * acc_1) - acc_2;
-		//msg.ang[i] =( data.ang[i] * ang_1) - ang_2;
-	}
-
-	*/
 	//筋電データ解析（AD変換）(10/25)
 	EmgData dataemg(packet.data[0]);
 	for(int i=0; i<2; i++){
@@ -306,7 +331,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		///上記の計算式だと不安定だったため下記に変更し簡単にした(11/2)///
 		msgemg.emg[i] = dataemg.emg[i] * ( 379.5 / 278460 );
 		msgemg.iemg[i] = dataemg.iemg[i] * ( 379.5 / 278460 );
-	}
+	}*/
 
 	
 	/*
@@ -318,7 +343,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	///////////////////↑ここまでAD変換↑//////////////////////////////
 	//<A-2>
-
+	/*
 	///全波整流（筋電計データ処理）1/17///
 	for(int i=0;i<2;i++){
 		if(msgemg.emg[i]<0){
@@ -328,7 +353,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 			msgemg.iemg[i] = msgemg.iemg[i] * (-1);
 		}
 	}
-
+	*/
 	/*+++++++++++++++++++++++++++++++++++↓追加↓（11/18）++++++++++++++++++++++++++++++++++++*/
 	
 	/*
@@ -342,14 +367,14 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	//////////////////////////補正プログラム////////////////////////////
 	////////	Y = α X + β    α:傾き　β:バイアス	////////////////
 	////////////////////////////////////////////////////////////////////
-	
-	
+	//
+	/*
 	//　補正係数の定義 （加速度）
 	double acc_a_x, acc_a_y, acc_a_z;	//	a:傾き
 	double acc_bias_x, acc_bias_y, acc_bias_z;	//	bias:バイアス
 
 		//////////////↓ID=1の補正式↓////////////
-
+		*/
 	/*
 	
 	//補正係数入力
@@ -391,7 +416,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 
 
 	
-		
+		/*
 		//補正係数入力(加速度)
 	
 	acc_a_x=2.1476;			////////////////////////////////////////	
@@ -401,16 +426,20 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	acc_bias_y=-0.6965;		////////////////////////////////////////
 	acc_bias_z=-0.6287;		////////////////////////////////////////
 
+	*/
+	/*
+for(int i=0; i<15; i++){
+		msg.acc[i] = (msg.acc[i]+acc_bias_x)*acc_a_x;
+	}
+	*/
 	
 	msg.acc[0] = (msg.acc[0]+acc_bias_x)*acc_a_x;		//////////
 	msg.acc[1] = (msg.acc[1]+acc_bias_y)*acc_a_y;		//補正式//
 	msg.acc[2] = (msg.acc[2]+acc_bias_z)*acc_a_z;		//////////
 	
-
-
-
 	
-
+	
+	/*
 	//  補正係数の定義　（角速度）
 	double ang_a_x, ang_a_y, ang_a_z;	//	a:傾き
 	double ang_bias_x,ang_bias_y,ang_bias_z;	//	bias:バイアス
@@ -423,7 +452,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	ang_bias_x=337;				///////////////////////////////////////
 	ang_bias_y=0;				///////////////////////////////////////
 	ang_bias_z=0;				///////////////////////////////////////
-
+	*/
 
 	msg.ang[0] = (msg.ang[0]+ang_bias_x)*ang_a_x;		//////////
 	msg.ang[1] = (msg.ang[1]+ang_bias_y)*ang_a_y;		//補正式//
@@ -440,12 +469,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	/*+++++++++++++++++++++++++++++++++++　↑ここまで追加↑（11/18）++++++++++++++++++++++++++++++++++++*/
 	
-	
-	//static int iii=0;	//テスト（12/16）
-	static int count=0, count2=0;
-	//iii++;
-
-	
+	/*
 	////ローパスフィルタ///////
 	const double r=0.8;
 	const double rr=1-r;
@@ -465,7 +489,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 			msg.acc[2] = r*msg.acc[2] + rr*myVar.accArrDlg[5][count-1];
 		}
 
-	}
+	}*/
 
 	
 
@@ -482,36 +506,30 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		myVar.accArrDlg[6][count] = msgemg.iemg[0];
 		myVar.accArrDlg[7][count] = msgemg.iemg[1];
 	 }*/
-
-	 if(packet.smid==4){
-		myVar.accArrDlg[0][count] = msg.acc[0];
-		myVar.accArrDlg[1][count] = msg.acc[1];
-		myVar.accArrDlg[2][count] = msg.acc[2];
-		//myVar.accArrDlg[0][count] = msg.ang[0];
-		//myVar.accArrDlg[1][count] = msg.ang[1];
-		//myVar.accArrDlg[2][count] = msg.ang[2];
-	 }
-	 else if(packet.smid==5){
-		myVar.accArrDlg[3][count] = msg.acc[0];
-		myVar.accArrDlg[4][count] = msg.acc[1];
-		myVar.accArrDlg[5][count] = msg.acc[2];
-		//myVar.accArrDlg[0][count] = msg.ang[0];
-		//myVar.accArrDlg[1][count] = msg.ang[1];
-		//myVar.accArrDlg[2][count] = msg.ang[2];
-	 }
 	
-
-
-	 else{
+	if(packet.smid==4){
+		for(int i=0;i<3;i++){
+		myVar.accArrDlg[i][count4] = msg.acc[i];
+		myVar.accArrDlg[i+3][count4] = msg.ang[i];
+		}
+		count4++;
+		}
+	/*
+	else if(packet.smid==5){
+		myVar.accArrDlg[3][count5] = msg.acc[0];
+		myVar.accArrDlg[4][count5] = msg.acc[1];
+		myVar.accArrDlg[5][count5] = msg.acc[2];
+		count5++;
+		}
+	*/
+	 
+	// else{
 		//サンプル数+2で固定する
 		//printf("サンプリング終了\n");
-		count=myVar.numSample+2;
-		count2=myVar.numSample+2;
-	}
-
-	count2++;
-	if(count2%2==1)//偶数のとき
-		count++;
+		///count4=myVar.numSample+2;
+		//count5=myVar.numSample+2;
+		//count2=myVar.numSample+2;
+//	}
 
 	//++++++++++++++++++++++++++|current acc|+++++++++++++++++++++++++++
 	/*
@@ -546,8 +564,8 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		//myVar.curAccArrDlg[1] = msg.ang[1];
 		//myVar.curAccArrDlg[2] = msg.ang[2];
 	//}*/
-			//}
-
+	//}
+	 /*--------------------------------------5/8
 	 if(packet.smid==4){
 		myVar.curAccArrDlg[0] = msg.acc[0];
 		myVar.curAccArrDlg[1] = msg.acc[1];
@@ -566,6 +584,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		//myVar.curAccArrDlg[5] = msg.ang[2];
 	//}
 		}
+		*/
 	//countSeq++;
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -664,7 +683,12 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	//<A-4>
 
-
+	}
+	/*
+	count2++;
+	if(count2%2==1)//偶数のとき
+		count++;
+		*/
 	// メインスレッドにメッセージ送信
 	::PostMessage(h_dlg, WM_USER_STAT_UPDATE, 0, 0);
 	::PostMessage(h_dlg, WM_USER_ACC_UPDATE, 0, 0);
@@ -1746,7 +1770,7 @@ void CDllSampleCppDlg::OnBnClickedButton8()//(計測したデータをエクセルに出力する
 	FILE *file;
 	file = fopen("test.csv","w");
 	for(i<0;i<numSample;i++){
-		fprintf(file,"%f\t,%f\t,%f\n",myVar.accArrDlg[0][i],myVar.accArrDlg[1][i],myVar.accArrDlg[2][i]);
+		fprintf(file,"%f\t,%f\t,%f\t,%f\t,%f\t,%f\n",myVar.accArrDlg[0][i],myVar.accArrDlg[1][i],myVar.accArrDlg[2][i],myVar.accArrDlg[3][i],myVar.accArrDlg[4][i],myVar.accArrDlg[5][i]);
 	}
 	
 	fclose(file);
