@@ -1,56 +1,30 @@
-﻿2017/05/17 18:11:41 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\DllSampleCpp\DllSampleCpp.vcxproj" (build ターゲット)。
+﻿2017/05/19 17:56:41 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\DllSampleCpp\DllSampleCpp.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
-         "AlwaysCreate" が指定されたため "Release\DllSampleCpp.unsuccessfulbuild" を作成しています。
+         "Release\DllSampleCpp.unsuccessfulbuild" のタッチ タスクを実行しています。
        ClCompile:
          すべての出力が最新のものです。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\DllSampleCpp.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DllSampleCppDlg.cpp
-         DllSampleCppDlg.cpp
-     1>DllSampleCppDlg.cpp(1167): warning C4800: 'BOOL' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
-     1>DllSampleCppDlg.cpp(1222): warning C4101: 'kkkk' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1329): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1387): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1398): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1399): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1423): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1431): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
-     1>DllSampleCppDlg.cpp(1421): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1463): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1471): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
-     1>DllSampleCppDlg.cpp(1472): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1474): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1460): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1771): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1772): warning C4552: '<' : 演算子にプログラム上の作用がありません。作用を伴う演算子を使用してください
+         すべての出力が最新のものです。
        ResourceCompile:
          すべての出力が最新のものです。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\Release\DllSampleCpp.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\2014年度\CUDA\cuda_by_example\lib" /MANIFEST /ManifestFile:"Release\DllSampleCpp.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\Release\DllSampleCpp.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\Release\DllSampleCpp.lib" /MACHINE:X86 Release\DllSampleCpp.res
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\2014年度\CUDA\cuda_by_example\lib" /MANIFEST /ManifestFile:"Release\DllSampleCpp.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.lib" /MACHINE:X86 Release\DllSampleCpp.res
          Release\DllSampleCpp.obj
          Release\DllSampleCppDlg.obj
          Release\mfcconsole.obj
          Release\Scene.obj
          Release\stdafx.obj
          コード生成しています。
-     1>c:\users\ito.ohshimat-pc\desktop\ループ時間計測用somj2-test簡略\dllsamplecpp\dllsamplecppdlg.cpp(1758): warning C4715: 'CDllSampleCppDlg::PreTranslateMessage' : 値を返さないコントロール パスがあります。
+     1>c:\users\ito.ohshimat-pc\desktop\som_ang\dllsamplecpp\dllsamplecppdlg.cpp(1673): warning C4715: 'CDllSampleCppDlg::PreTranslateMessage' : 値を返さないコントロール パスがあります。
          コード生成が終了しました。
-         DllSampleCpp.vcxproj -> C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\Release\DllSampleCpp.exe
+         DllSampleCpp.vcxproj -> C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\Release\DllSampleCpp.exe;#1" /manifest Release\DllSampleCpp.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.exe;#1" /manifest Release\DllSampleCpp.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
        FinalizeBuildStatus:
          ファイル "Release\DllSampleCpp.unsuccessfulbuild" を削除しています。
          "Release\DllSampleCpp.lastbuildstate" のタッチ タスクを実行しています。
-     1>プロジェクト "C:\Users\ito.OHSHIMAT-PC\Desktop\ループ時間計測用SOMj2-test簡略\DllSampleCpp\DllSampleCpp.vcxproj" (build ターゲット) のビルドが完了しました。
+     1>プロジェクト "C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\DllSampleCpp\DllSampleCpp.vcxproj" (build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:01.70
+経過時間 00:00:01.00

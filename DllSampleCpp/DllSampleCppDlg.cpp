@@ -303,12 +303,12 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 
 	
 	//補正係数入力
-	ang_a_x=4.09;				///////////////////////////////////////
+	ang_a_x=1.0;				///////////////////////////////////////
 	ang_a_y=1.0;				///////////////////////////////////////
 	ang_a_z=1.0;				/////////	ここに値を入力　　/////////
-	ang_bias_x=337;				///////////////////////////////////////
-	ang_bias_y=0;				///////////////////////////////////////
-	ang_bias_z=0;				///////////////////////////////////////
+	ang_bias_x=337.329;				///////////////////////////////////////
+	ang_bias_y=325.6405;				///////////////////////////////////////
+	ang_bias_z=335.9135;				///////////////////////////////////////
 	
 	static int count4=0 , count5=0 , count2=0;
 
@@ -332,13 +332,6 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		msgemg.emg[i] = dataemg.emg[i] * ( 379.5 / 278460 );
 		msgemg.iemg[i] = dataemg.iemg[i] * ( 379.5 / 278460 );
 	}*/
-
-	
-	/*
-	msg.ang[0]=data.ang[0];
-	msg.ang[1]=data.ang[1];
-	msg.ang[2]=data.ang[2];
-	*/
 
 	
 	///////////////////↑ここまでAD変換↑//////////////////////////////
@@ -368,92 +361,12 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	////////	Y = α X + β    α:傾き　β:バイアス	////////////////
 	////////////////////////////////////////////////////////////////////
 	//
-	/*
-	//　補正係数の定義 （加速度）
-	double acc_a_x, acc_a_y, acc_a_z;	//	a:傾き
-	double acc_bias_x, acc_bias_y, acc_bias_z;	//	bias:バイアス
-
-		//////////////↓ID=1の補正式↓////////////
-		*/
-	/*
-	
-	//補正係数入力
-	acc_a_x=1.0;			////////////////////////////////////////	
-	acc_a_y=1.0;			////////////////////////////////////////
-	acc_a_z=1.0;			////////	ここに値を入力　　//////////
-	acc_bias_x=-1.6;		////////////////////////////////////////
-	acc_bias_y=-0.7;		////////////////////////////////////////
-	acc_bias_z=-0.0;		////////////////////////////////////////
-
-
-	msg.acc[0] = msg.acc[0]*acc_a_x+acc_bias_x;		//////////
-	msg.acc[1] = msg.acc[1]*acc_a_y+acc_bias_y;		//補正式//
-	msg.acc[2] = msg.acc[2]*acc_a_z+acc_bias_z;		//////////
-
-
-	//  補正係数の定義　（角速度）
-	double ang_a_x, ang_a_y, ang_a_z;	//	a:傾き
-	double ang_bias_x,ang_bias_y,ang_bias_z;	//	bias:バイアス
-
-
-	//補正係数入力
-	ang_a_x=1.0;				////////////////////////////////////////
-	ang_a_y=1.0;				////////////////////////////////////////
-	ang_a_z=1.0;				//////// 	ここに値を入力　　//////////
-	ang_bias_x=330;				////////////////////////////////////////
-	ang_bias_y=340;				////////////////////////////////////////
-	ang_bias_z=350;				////////////////////////////////////////
-
-
-	msg.ang[0] = msg.ang[0]*ang_a_x+ang_bias_x;		//////////
-	msg.ang[1] = msg.ang[1]*ang_a_y+ang_bias_y;		//補正式//
-	msg.ang[2] = msg.ang[2]*ang_a_z+ang_bias_z;		//////////
-
-
-	//}else{
-	*/
-		//////////////↓ID=2の補正式↓////////////
-
-
-	
-		/*
-		//補正係数入力(加速度)
-	
-	acc_a_x=2.1476;			////////////////////////////////////////	
-	acc_a_y=2.1891;			////////////////////////////////////////
-	acc_a_z=2.1311;			////////	ここに値を入力　　//////////
-	acc_bias_x=-1.5705;		////////////////////////////////////////
-	acc_bias_y=-0.6965;		////////////////////////////////////////
-	acc_bias_z=-0.6287;		////////////////////////////////////////
-
-	*/
-	/*
-for(int i=0; i<15; i++){
-		msg.acc[i] = (msg.acc[i]+acc_bias_x)*acc_a_x;
-	}
-	*/
 	
 	msg.acc[0] = (msg.acc[0]+acc_bias_x)*acc_a_x;		//////////
 	msg.acc[1] = (msg.acc[1]+acc_bias_y)*acc_a_y;		//補正式//
 	msg.acc[2] = (msg.acc[2]+acc_bias_z)*acc_a_z;		//////////
 	
 	
-	
-	/*
-	//  補正係数の定義　（角速度）
-	double ang_a_x, ang_a_y, ang_a_z;	//	a:傾き
-	double ang_bias_x,ang_bias_y,ang_bias_z;	//	bias:バイアス
-
-	
-	//補正係数入力
-	ang_a_x=4.09;				///////////////////////////////////////
-	ang_a_y=1.0;				///////////////////////////////////////
-	ang_a_z=1.0;				/////////	ここに値を入力　　/////////
-	ang_bias_x=337;				///////////////////////////////////////
-	ang_bias_y=0;				///////////////////////////////////////
-	ang_bias_z=0;				///////////////////////////////////////
-	*/
-
 	msg.ang[0] = (msg.ang[0]+ang_bias_x)*ang_a_x;		//////////
 	msg.ang[1] = (msg.ang[1]+ang_bias_y)*ang_a_y;		//補正式//
 	msg.ang[2] = (msg.ang[2]+ang_bias_z)*ang_a_z;		//////////
@@ -469,27 +382,29 @@ for(int i=0; i<15; i++){
 	
 	/*+++++++++++++++++++++++++++++++++++　↑ここまで追加↑（11/18）++++++++++++++++++++++++++++++++++++*/
 	
-	/*
+	
 	////ローパスフィルタ///////
 	const double r=0.8;
 	const double rr=1-r;
-	if(count>1){
+	if(count4>1){
 		//msgemg.emg[0] = r*msgemg.emg[0] + rr*myVar.accArrDlg[0][count-1];
 		//msgemg.emg[1] = r*msgemg.emg[1] + rr*myVar.accArrDlg[1][count-1];
 		//msgemg.iemg[0] = r*msgemg.iemg[0] + rr*myVar.accArrDlg[1][count-1];
 		//msgemg.iemg[1] = r*msgemg.iemg[1] + rr*myVar.accArrDlg[1][count-1];
 		if(packet.smid==4){
-			msg.acc[0] = r*msg.acc[0] + rr*myVar.accArrDlg[0][count-1];
-			msg.acc[1] = r*msg.acc[1] + rr*myVar.accArrDlg[1][count-1];
-			msg.acc[2] = r*msg.acc[2] + rr*myVar.accArrDlg[2][count-1];
+			for(int i=0;i<3;++i){
+			msg.acc[i] = r*msg.acc[i] + rr*myVar.accArrDlg[i][count4-1];
+			msg.ang[i] = r*msg.ang[i] + rr*myVar.accArrDlg[i+3][count4-1];
+			}
 		}
-		if(packet.smid==5){
-			msg.acc[0] = r*msg.acc[0] + rr*myVar.accArrDlg[3][count-1];
-			msg.acc[1] = r*msg.acc[1] + rr*myVar.accArrDlg[4][count-1];
-			msg.acc[2] = r*msg.acc[2] + rr*myVar.accArrDlg[5][count-1];
+		else if(packet.smid==5){
+			for(int i=0;i<3;++i){
+			msg.acc[i] = r*msg.acc[i] + rr*myVar.accArrDlg[i+6][count5-1];
+			msg.ang[i] = r*msg.ang[i] + rr*myVar.accArrDlg[i+9][count5-1];
+			}
 		}
 
-	}*/
+	}
 
 	
 
@@ -1770,7 +1685,7 @@ void CDllSampleCppDlg::OnBnClickedButton8()//(計測したデータをエクセルに出力する
 	FILE *file;
 	file = fopen("test.csv","w");
 	for(i<0;i<numSample;i++){
-		fprintf(file,"%f\t,%f\t,%f\t,%f\t,%f\t,%f\n",myVar.accArrDlg[0][i],myVar.accArrDlg[1][i],myVar.accArrDlg[2][i],myVar.accArrDlg[3][i],myVar.accArrDlg[4][i],myVar.accArrDlg[5][i]);
+		fprintf(file,"%f,%f,%f,%f,%f,%f\n",myVar.accArrDlg[0][i],myVar.accArrDlg[1][i],myVar.accArrDlg[2][i],myVar.accArrDlg[3][i],myVar.accArrDlg[4][i],myVar.accArrDlg[5][i]);
 	}
 	
 	fclose(file);
