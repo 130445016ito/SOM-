@@ -122,7 +122,7 @@ namespace lp_wsm
 	{
 		short          mag[3]; ///< 地磁気
 		unsigned short acc[3]; ///< 加速度
-		unsigned short ang[3]; ///< 角速度
+		unsigned short angv[3]; ///< 角速度
 
 		///
 		///	@brief 自動的にメンバを求めるコンストラクタです。

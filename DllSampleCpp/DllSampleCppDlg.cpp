@@ -319,7 +319,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	for(int i=0; i<3; i++){
 		msg.acc[i] = (3.3 * data.acc[i] / bit_scale - acc_0) / s_acc;
-		msg.ang[i] = (3.3 * data.ang[i] / bit_scale - ang_0) / s_ang;
+		msg.angv[i] = (3.3 * data.angv[i] / bit_scale - ang_0) / s_ang;
 		//cout<<data.acc[i]<<endl;
 	}
 	/*
@@ -367,9 +367,9 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	msg.acc[2] = (msg.acc[2]+acc_bias_z)*acc_a_z;		//////////
 	
 	
-	msg.ang[0] = (msg.ang[0]+ang_bias_x)*ang_a_x;		//////////
-	msg.ang[1] = (msg.ang[1]+ang_bias_y)*ang_a_y;		//補正式//
-	msg.ang[2] = (msg.ang[2]+ang_bias_z)*ang_a_z;		//////////
+	msg.angv[0] = (msg.angv[0]+ang_bias_x)*ang_a_x;		//////////
+	msg.angv[1] = (msg.angv[1]+ang_bias_y)*ang_a_y;		//補正式//
+	msg.angv[2] = (msg.angv[2]+ang_bias_z)*ang_a_z;		//////////
 	//}
 	
 	/////////////////////////////////////////////////////////////////////
@@ -384,7 +384,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	
 	////ローパスフィルタ///////
-	const double r=0.8;
+	const double r=0.95;
 	const double rr=1-r;
 	if(count4>1){
 		//msgemg.emg[0] = r*msgemg.emg[0] + rr*myVar.accArrDlg[0][count-1];
@@ -400,7 +400,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 		else if(packet.smid==5){
 			for(int i=0;i<3;++i){
 			msg.acc[i] = r*msg.acc[i] + rr*myVar.accArrDlg[i+6][count5-1];
-			msg.ang[i] = r*msg.ang[i] + rr*myVar.accArrDlg[i+9][count5-1];
+			msg.angv[i] = r*msg.angv[i] + rr*myVar.accArrDlg[i+9][count5-1];
 			}
 		}
 
@@ -425,7 +425,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	if(packet.smid==4){
 		for(int i=0;i<3;i++){
 		myVar.accArrDlg[i][count4] = msg.acc[i];
-		myVar.accArrDlg[i+3][count4] = msg.ang[i];
+		myVar.accArrDlg[i+3][count4] = msg.angv[i];
 		}
 		count4++;
 		}
