@@ -184,8 +184,8 @@ class CMsgData
 public:
 	CString status;
 	double acc[3];
-	double angv[3];
-	double ang[3];
+	double angv[3];//Šp‘¬“x
+	double ang[3];//Šp“x
 	
 };
 

@@ -310,12 +310,16 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	ang_bias_y=325.6405;				///////////////////////////////////////
 	ang_bias_z=335.9135;				///////////////////////////////////////
 	
-	static int count4=0 , count5=0 , count2=0;
+	//角度推定
+	double dt = 0.01;////2017052時点ループ時間
+	double dtt = dt/2;
 
+	static int count4=0 , count5=0 , count2=0;
+	
 
 	// 加速度データ解析/////////↓AD変換↓////////////////////////
-	for(int i=0;i<5;i++){
-	WmsData data(packet.data[i], packet.pid);
+	for(int n=0;n<5;n++){
+	WmsData data(packet.data[n], packet.pid);
 	
 	for(int i=0; i<3; i++){
 		msg.acc[i] = (3.3 * data.acc[i] / bit_scale - acc_0) / s_acc;
@@ -406,7 +410,11 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 
 	}
 
-	
+	/////////角度変換////////////////2017.05.22
+	for(int i=0;i<3;++i){
+		msg.ang[i] += (msg.angv[i]+msg.angv[i-1])*dtt;
+		msg.ang[i] = 0.95 * ((msg.angv[i]+msg.angv[i-1])*dtt) + 0.05 * msg.ang[i];
+	}
 
 	/////////////////*センサ別でデータ保管（10/21）*////////////
 	 /*if(packet.smid==1){
@@ -425,7 +433,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	if(packet.smid==4){
 		for(int i=0;i<3;i++){
 		myVar.accArrDlg[i][count4] = msg.acc[i];
-		myVar.accArrDlg[i+3][count4] = msg.angv[i];
+		myVar.accArrDlg[i+3][count4] = msg.ang[i];
 		}
 		count4++;
 		}
