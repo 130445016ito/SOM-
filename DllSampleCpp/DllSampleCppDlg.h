@@ -185,7 +185,13 @@ public:
 	CString status;
 	double acc[3];
 	double angv[3];//角速度
-	double ang[3];//角度
+	double preangv[3];//ひとつ前の角速度保管用
+
+	double ang[3];//角速度→角度
+	double preang[3];//ひとつ前の角速度→角度
+
+	double ang_acc[3];//加速度→角度
+	double preang_acc[3];//ひとつ前の加速度→角度
 	
 };
 

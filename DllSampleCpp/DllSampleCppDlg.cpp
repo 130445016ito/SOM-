@@ -36,7 +36,9 @@
 
 /*+++++++++追加（2016・6/15）++++++++++*/
 
+/*++++追加2017.05.23++++*/
 
+#include <math.h>
 
 using namespace std;
 
@@ -296,7 +298,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	acc_bias_x=-1.5705;		////////////////////////////////////////
 	acc_bias_y=-0.6965;		////////////////////////////////////////
 	acc_bias_z=-0.6287;		////////////////////////////////////////
-
+	
 	//  補正係数の定義　（角速度）
 	double ang_a_x, ang_a_y, ang_a_z;	//	a:傾き
 	double ang_bias_x,ang_bias_y,ang_bias_z;	//	bias:バイアス
@@ -320,7 +322,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	// 加速度データ解析/////////↓AD変換↓////////////////////////
 	for(int n=0;n<5;n++){
 	WmsData data(packet.data[n], packet.pid);
-	
+
 	for(int i=0; i<3; i++){
 		msg.acc[i] = (3.3 * data.acc[i] / bit_scale - acc_0) / s_acc;
 		msg.angv[i] = (3.3 * data.angv[i] / bit_scale - ang_0) / s_ang;
@@ -410,10 +412,28 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 
 	}
 
-	/////////角度変換////////////////2017.05.22
+	/////////加速度から角度変換////////////////2017.05.23
+	double ax2 = pow(msg.acc[0],2);
+	double ay2 = pow(msg.acc[1],2);
+	double az2 = pow(msg.acc[2],2);
+	double sax = sqrt(ay2+az2);
+	double say = sqrt(ax2+az2);
+	double saz = sqrt(ax2+ay2);
+
+	msg.ang_acc[0] = atan2(msg.acc[0],sax)*180/M_PI;
+	msg.ang_acc[1] = atan2(msg.acc[1],say)*180/M_PI;
+	msg.ang_acc[2] = atan2(msg.acc[2],saz)*180/M_PI;
+	/*
+	cout << "msg.ang_acc[0] =" << msg.ang_acc[0] <<endl;
+	cout << "msg.ang_acc[1] =" << msg.ang_acc[1] <<endl;
+	cout << "msg.ang_acc[2] =" << msg.ang_acc[2] <<endl;
+	*/
+
+	/////////角速度から角度変換////////////////2017.05.23
 	for(int i=0;i<3;++i){
-		msg.ang[i] += (msg.angv[i]+msg.angv[i-1])*dtt;
-		msg.ang[i] = 0.95 * ((msg.angv[i]+msg.angv[i-1])*dtt) + 0.05 * msg.ang[i];
+		msg.ang[i] += (msg.preangv[i]+msg.angv[i])*dtt;
+		msg.preangv[i] = msg.angv[i];
+		msg.ang[i] = 0.95 * (msg.ang[i]+msg.angv[i]*dt) + 0.05 * msg.ang_acc[i];
 	}
 
 	/////////////////*センサ別でデータ保管（10/21）*////////////
@@ -432,7 +452,7 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	
 	if(packet.smid==4){
 		for(int i=0;i<3;i++){
-		myVar.accArrDlg[i][count4] = msg.acc[i];
+		myVar.accArrDlg[i][count4] = msg.ang_acc[i];
 		myVar.accArrDlg[i+3][count4] = msg.ang[i];
 		}
 		count4++;
@@ -630,6 +650,10 @@ void CDllSampleCppDlg::CbStopMeasure(const char *port_name, unsigned char *buffe
 	msg.acc[0] = 0;
 	msg.acc[1] = 0;
 	msg.acc[2] = 0;
+	//角速度データ0リセット
+	msg.ang[0] = 0;
+	msg.ang[1] = 0;
+	msg.ang[2] = 0;
 
 	//筋電データ0リセット1/25
 	msgemg.emg[0]=0;

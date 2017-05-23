@@ -1,4 +1,4 @@
-﻿2017/05/22 18:26:02 にビルドを開始しました。
+﻿2017/05/23 20:54:24 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\DllSampleCpp\DllSampleCpp.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Release\DllSampleCpp.unsuccessfulbuild" を作成しています。
@@ -6,31 +6,31 @@
          すべての出力が最新のものです。
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\DllSampleCpp.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DllSampleCppDlg.cpp
          DllSampleCppDlg.cpp
-     1>DllSampleCppDlg.cpp(1090): warning C4800: 'BOOL' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
-     1>DllSampleCppDlg.cpp(1145): warning C4101: 'kkkk' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1252): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1114): warning C4800: 'BOOL' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+     1>DllSampleCppDlg.cpp(1169): warning C4101: 'kkkk' : ローカル変数は 1 度も使われていません。
+     1>DllSampleCppDlg.cpp(1276): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1310): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1334): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1321): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1345): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1322): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1346): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1346): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1370): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1354): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
-     1>DllSampleCppDlg.cpp(1344): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1386): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1378): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
+     1>DllSampleCppDlg.cpp(1368): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
+     1>DllSampleCppDlg.cpp(1410): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1394): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
-     1>DllSampleCppDlg.cpp(1395): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1418): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
+     1>DllSampleCppDlg.cpp(1419): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1397): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1421): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(253) : 'fscanf' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1383): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
-     1>DllSampleCppDlg.cpp(1694): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>DllSampleCppDlg.cpp(1407): warning C4101: 'j' : ローカル変数は 1 度も使われていません。
+     1>DllSampleCppDlg.cpp(1718): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : 'fopen' の宣言を確認してください。
-     1>DllSampleCppDlg.cpp(1695): warning C4552: '<' : 演算子にプログラム上の作用がありません。作用を伴う演算子を使用してください
+     1>DllSampleCppDlg.cpp(1719): warning C4552: '<' : 演算子にプログラム上の作用がありません。作用を伴う演算子を使用してください
        ResourceCompile:
          すべての出力が最新のものです。
        Link:
@@ -41,7 +41,7 @@
          Release\Scene.obj
          Release\stdafx.obj
          コード生成しています。
-     1>c:\users\ito.ohshimat-pc\desktop\som_ang\dllsamplecpp\dllsamplecppdlg.cpp(1681): warning C4715: 'CDllSampleCppDlg::PreTranslateMessage' : 値を返さないコントロール パスがあります。
+     1>c:\users\ito.ohshimat-pc\desktop\som_ang\dllsamplecpp\dllsamplecppdlg.cpp(1705): warning C4715: 'CDllSampleCppDlg::PreTranslateMessage' : 値を返さないコントロール パスがあります。
          コード生成が終了しました。
          DllSampleCpp.vcxproj -> C:\Users\ito.OHSHIMAT-PC\Desktop\SOM_ang\Release\DllSampleCpp.exe
        Manifest:
@@ -53,4 +53,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.43
+経過時間 00:00:01.77
