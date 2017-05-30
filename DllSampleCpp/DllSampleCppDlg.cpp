@@ -430,11 +430,21 @@ void CDllSampleCppDlg::CbStartMeasure(const char *port_name, unsigned char *buff
 	*/
 
 	/////////角速度から角度変換////////////////2017.05.23
+	static int a=0;
 	for(int i=0;i<3;++i){
 		msg.ang[i] += (msg.preangv[i]+msg.angv[i])*dtt;
 		msg.preangv[i] = msg.angv[i];
-		msg.ang[i] = 0.95 * (msg.ang[i]+msg.angv[i]*dt) + 0.05 * msg.ang_acc[i];
+		msg.preang[i] = msg.ang[i];
 	}
+	if(a>1){
+		for(int i=0;i<3;++i){
+		msg.ang[i] += (msg.preangv[i]+msg.angv[i])*dtt;
+		msg.preangv[i] = msg.angv[i];
+		msg.ang[i] = 0.95 * (msg.preang[i]+msg.angv[i]*dt) + 0.05 * msg.ang_acc[i];
+		msg.preang[i] = msg.ang[i];
+		}
+	}
+	++a;
 
 	/////////////////*センサ別でデータ保管（10/21）*////////////
 	 /*if(packet.smid==1){
